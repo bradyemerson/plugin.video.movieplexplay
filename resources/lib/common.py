@@ -133,3 +133,9 @@ def parse_date(date, format='%Y-%m-%d'):
         return datetime.strptime(date, format)
     except TypeError:
         return datetime(*(time.strptime(date, format)[0:6]))
+
+def play_url(url):
+    kiosk = 'yes'  # TODO make option
+    xbmc.executebuiltin("RunPlugin(plugin://plugin.program.chrome.launcher/?url=" + urllib.quote_plus(
+            url) + "&mode=showSite&stopPlayback=yes&kiosk=" + kiosk + ")")
+    xbmcplugin.setResolvedUrl(pluginHandle, True, xbmcgui.ListItem())
